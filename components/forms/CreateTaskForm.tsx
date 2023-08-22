@@ -100,7 +100,7 @@ function CreateTaskForm() {
           </span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-darkGrey rounded-lg max-w-xs max-h-[80%]  border-darkGrey overflow-auto">
+      <DialogContent className="bg-darkGrey rounded-lg max-w-xs max-h-[80%]  border-darkGrey overflow-auto md:max-w-md">
         <DialogHeader className="text-start">
           <DialogTitle className="text-white  text-[18px]">
             Add New Task
@@ -147,7 +147,7 @@ function CreateTaskForm() {
                 </FormItem>
               )}
             />
-            <div className="flex flex-col">
+            <div className="flex flex-col  gap-2">
               <Label className="text-white font-bold mb-2">Subtasks</Label>
               {/* map the subtasks */}
               {fields.map((field, index) => (
