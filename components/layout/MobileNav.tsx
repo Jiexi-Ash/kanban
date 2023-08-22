@@ -2,8 +2,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-import CreateTaskForm from "./forms/CreateTaskForm";
-import BoardData from "../data.json";
+import CreateTaskForm from "../forms/CreateTaskForm";
+import BoardData from "../../data.json";
 
 import {
   Dialog,
@@ -16,18 +16,18 @@ import {
 } from "@/components/ui/dialog";
 
 import exp from "constants";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
-import { Switch } from "./ui/switch";
-import CreateNewBoardForm from "./forms/createNewBoardForm";
+import { Switch } from "../ui/switch";
+import CreateNewBoardForm from "../forms/createNewBoardForm";
 
-function Navbar() {
+function MobileNav() {
   const boardNames = BoardData.boards.map((board) => board.name);
   const [selectedBoard, setSelectedBoard] = useState(boardNames[0]);
 
   return (
-    <div className="h-[60px]  flex items-center px-4 bg-darkGrey">
-      <div className="w-full flex justify-between items-center">
+    <div className="h-[60px]  flex sm:items-center px-4 bg-darkGrey md:flex-col md:items-start md:justify-center md:hidden">
+      <div className="w-full flex justify-between items-center ">
         <div className="flex">
           <Image
             src="/assets/logo-mobile.svg"
@@ -54,7 +54,7 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default MobileNav;
 
 type BoardProps = {
   boardNames: string[];

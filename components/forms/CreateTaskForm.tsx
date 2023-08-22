@@ -87,13 +87,17 @@ function CreateTaskForm() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="rounded-2xl px-[18px] bg-primaryPurple">
+        <Button className="rounded-2xl px-[18px] md:px-6 bg-primaryPurple hover:bg-[#A8A4FF]">
           <Image
             src="/assets/icon-add-task-mobile.svg"
             width={12}
             height={12}
             alt="Add Task"
+            className="md:hidden"
           />
+          <span className="hidden md:block text-white text-xs md:text-[15px]">
+            +Add New Task
+          </span>
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-darkGrey rounded-lg max-w-xs max-h-[80%]  border-darkGrey overflow-auto">

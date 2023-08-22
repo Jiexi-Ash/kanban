@@ -85,18 +85,19 @@ function CreateNewBoardForm() {
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className="flex gap-2 text-primaryPurple px-6 hover:bg-transparent focus-visible:ring-0 focus:bg-transparent focus:outline-none"
+          className="flex gap-2 text-primaryPurple px-6 hover:bg-transparent focus-visible:ring-0 focus:bg-transparent focus:outline-none md:px-[28px]"
         >
           <Image
             src="/assets/icon-board.svg"
             width={16}
             height={16}
             alt="Add"
+            className=""
           />
           <span className="text-primaryPurple"> +Add New Board</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-darkGrey rounded-lg max-w-xs max-h-[80%]  border-darkGrey overflow-auto">
+      <DialogContent className="bg-darkGrey rounded-lg max-w-xs md:max-w-md max-h-[80%]  border-darkGrey overflow-auto">
         <DialogHeader className="text-start">
           <DialogTitle className="text-white  text-[18px] font-normal">
             Add New Board

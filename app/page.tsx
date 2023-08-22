@@ -10,30 +10,38 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import MainLayout from "@/components/layout/MainLayout.";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen  bg-veryDarkGrey">
-      <div className="flex justify-center items-center h-screen w-full flex-col">
-        <div className="flex justify-center flex-col w-full items-center gap-6">
-          <p className="text-[#828FA3] font-bold text-[18px] max-w-[343px] text-center">
-            This board is empty. Create a new column to get started.
-          </p>
-          <Button className="bg-primaryPurple max-w-fit rounded-3xl">
-            + Add New Column
-          </Button>
+    <main className="">
+      <MainLayout>
+        <div className="flex justify-center items-center h-screen w-full flex-col">
+          <div className="flex justify-center flex-col w-full items-center gap-6 ">
+            <p className="text-[#828FA3] font-bold text-[18px] max-w-[343px] text-center md:max-w-[460px] lg:max-w-[500px]">
+              This board is empty. Create a new column to get started.
+            </p>
+            <Button className="bg-primaryPurple max-w-fit rounded-3xl hover:bg-[#A8A4FF]">
+              + Add New Column
+            </Button>
+          </div>
         </div>
-      </div>
+      </MainLayout>
     </main>
   );
 }
 
 const AddTask = () => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button></Button>
-      </DialogTrigger>
-    </Dialog>
+    <div className="flex justify-center items-center h-screen w-full flex-col">
+      <div className="flex justify-center flex-col w-full items-center gap-6">
+        <p className="text-[#828FA3] font-bold text-[18px] max-w-[343px] text-center">
+          This board is empty. Create a new column to get started.
+        </p>
+        <Button className="bg-primaryPurple max-w-fit rounded-3xl">
+          + Add New Column
+        </Button>
+      </div>
+    </div>
   );
 };
