@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useTransition } from "react";
 
 import Image from "next/image";
 
@@ -45,10 +45,11 @@ import { Button } from "@/components/ui/button";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { createBoard } from "@/app/_actions/board";
 
 const columnSchema = z.object({
   id: z.string(),
-  columnName: z.string().min(4, "Title must be at least 4 characters"),
+  name: z.string().min(4, "Title must be at least 4 characters"),
 });
 
 const boardSchema = z.object({
@@ -59,6 +60,8 @@ const boardSchema = z.object({
 type formValues = z.infer<typeof boardSchema>;
 
 function CreateNewBoardForm() {
+  const [isPending, startTransition] = useTransition();
+
   const form = useForm<formValues>({
     resolver: zodResolver(boardSchema),
     defaultValues: {
@@ -66,7 +69,7 @@ function CreateNewBoardForm() {
       boardColumns: [
         {
           id: "3242354534534",
-          columnName: "",
+          name: "",
         },
       ],
     },
@@ -78,8 +81,20 @@ function CreateNewBoardForm() {
   });
 
   const onSubmit = (data: formValues) => {
-    console.log(data);
+    const { boardName, boardColumns } = data;
+
+    startTransition(async () => {
+      try {
+        await createBoard({
+          boardName,
+          boardColumns,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
   };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -132,7 +147,7 @@ function CreateNewBoardForm() {
                 <div key={field.id} className="w-full flex">
                   <FormField
                     control={form.control}
-                    name={`boardColumns.${index}.columnName`}
+                    name={`boardColumns.${index}.name`}
                     render={({ field }) => (
                       <FormItem className="w-full">
                         <FormControl>
@@ -166,7 +181,7 @@ function CreateNewBoardForm() {
                 <Button
                   type="button"
                   className="w-full rounded-full bg-white text-[13px] text-primaryPurple"
-                  onClick={() => append({ id: "", columnName: "" })}
+                  onClick={() => append({ id: "", name: "" })}
                 >
                   +Add Subtask
                 </Button>
