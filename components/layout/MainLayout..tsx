@@ -1,13 +1,26 @@
-import React, { Children } from "react";
+"use client";
+import React, { Children, useEffect } from "react";
 import MobileNav from "./MobileNav";
+
 import SideNav from "./SideNav";
 import { type } from "os";
 import TopNav from "./TopNav";
+import { Board } from "@prisma/client";
+import { useBoardStore } from "@/app/(store)/boardStore";
 
 type Props = {
+  boards?: Board[];
   children: React.ReactNode;
 };
-function MainLayout({ children }: Props) {
+function MainLayout({ children, boards }: Props) {
+  const { setBoard } = useBoardStore();
+
+  useEffect(() => {
+    if (boards && boards.length > 0) {
+      setBoard(boards);
+    }
+  }, [boards, setBoard]);
+
   return (
     <div className="w-full flex">
       <SideNav />

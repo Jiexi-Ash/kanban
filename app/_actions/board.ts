@@ -5,6 +5,7 @@ import * as z from "zod";
 
 import { boardSchema } from "@/lib/validations";
 import { revalidatePath } from "next/cache";
+import { BoardType } from "@/types";
 
 export const createBoard = async (boardData: z.infer<typeof boardSchema>) => {
   const { boardName, boardColumns } = boardData;
@@ -33,4 +34,26 @@ export const createBoard = async (boardData: z.infer<typeof boardSchema>) => {
   revalidatePath("/");
 
   return;
+};
+
+export const getBoards = async () => {
+  const boards = await prisma.board.findMany({
+    include: {
+      Columns: {
+        include: {
+          Tasks: {
+            include: {
+              SubTasks: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!boards) {
+    throw new Error("No boards found");
+  }
+
+  return boards;
 };
